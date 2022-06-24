@@ -1,0 +1,23 @@
+service: test-api-gateway
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  memorySize: 128
+  timeout: 10
+  stage: develop
+  region: us-east-1
+
+functions:
+  hello:
+    handler: lambda.universal
+    name: hello
+    events:
+      - http: ANY {proxy+}
+      - http: ANY /
+  api:
+    handler: lambda.universal
+    name: api2
+    events:
+      - http: ANY {proxy+}
+      - http: ANY /api2
